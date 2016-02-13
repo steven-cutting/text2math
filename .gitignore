@@ -1,0 +1,9 @@
+*.pyc
+*.log
+*.sql
+*.sqlite
+*.swp
+*__pycache__*
+*.cache*
+*.eggs*
+*data/*

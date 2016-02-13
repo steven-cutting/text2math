@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+if [ "$1" = 'help' ]; then
+  printf "\n\tNo argument is equivalent to 'run'.\n\n"
+  printf "\tbuild - Run 'docker-compose build' for each test dir.\n"
+  printf "\trun - Run 'docker-compose run test' for each test dir.\n"
+  printf "\thelp - Show this message.\n\n"
+elif [ "$1" = 'build' ]; then
+  echo "Building Test Images"
+  exec find . -name "test_*" -type d -exec sh -c '(cd {} && docker-compose build)' ';'
+elif [ "$1" = 'run' ]; then
+  echo "Running tests"
+  exec find . -name "test_*" -type d -exec sh -c '(cd {} && docker-compose run test)' ';'
+else
+  exec ./rtests "run"
+fi
