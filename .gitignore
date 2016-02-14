@@ -7,3 +7,4 @@
 *.cache*
 *.eggs*
 *data/*
+*.7z
