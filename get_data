@@ -2,16 +2,14 @@
 
 printf "\n\tMaking 'data' dir.\n"
 mkdir data && cd data
-# Try this one also https://archive.org/download/stackexchange/stackoverflow.com-Users.7z
-printf "\n\tDownloading 'stackoverflow.com-Posts.7z'.\n\n"
-# wget https://archive.org/download/stackexchange/meta.programmers.stackexchange.com.7z
-# wget https://archive.org/download/stackexchange/stackoverflow.com-Posts.7z
+cd data
+printf "\n\tDownloading 'raspberrypi.stackexchange.com.7z'.\n\n"
 wget https://archive.org/download/stackexchange/raspberrypi.stackexchange.com.7z
 
 printf "\n\n\tMaking 'stackoverflow' dir.\n"
 mkdir stackoverflow && cd stackoverflow
 
-printf "\n\tExtracting 'stackoverflow.com-Posts.7z'.\n\n"
+printf "\n\tExtracting 'raspberrypi.stackexchange.com.7z'.\n\n"
 7z e ../*.7z
 
 printf "\n\n\tDONE\n"
