@@ -41,6 +41,10 @@ def join_strings(glue, strings):
 # ---------------------------
 
 
+def simple_split(string):
+    return string.split()
+
+
 @tlz.curry
 def split_on_reg(regpattern, string):
     """
@@ -105,10 +109,10 @@ def filter_stopwords(tokenset):
 def ngram_tuples(n, string, minlen=3, maxlen=25):
     return tlz.pipe(string,
                     lower,
-                    splitter_of_words,
-                    filter_whitespace,
-                    filter_shorter_than(minlen),
+                    simple_split,
                     filter_longer_than(maxlen),
+                    tlz.compose(tlz.concat, map_c(splitter_of_words)),
+                    filter_shorter_than(minlen),
                     filter_stopwords,
                     sliding_window_c(n))
 
@@ -135,10 +139,10 @@ def trigram(string, **kwargs):
 def uni_and_bigram_tuples(string, minlen=3, maxlen=25):
     return tlz.pipe(string,
                     lower,
-                    splitter_of_words,
-                    filter_whitespace,
-                    filter_shorter_than(minlen),
+                    simple_split,
                     filter_longer_than(maxlen),
+                    tlz.compose(tlz.concat, map_c(splitter_of_words)),
+                    filter_shorter_than(minlen),
                     filter_stopwords,
                     tuple,
                     tlz.juxt(sliding_window_c(1), sliding_window_c(2)),
