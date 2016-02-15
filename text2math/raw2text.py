@@ -3,7 +3,7 @@ __title__ = 'text2math'
 __author__ = 'Steven Cutting'
 __author_email__ = 'steven.e.cutting@linux.com'
 __created_on__ = '02/13/2016'
-__copyright__ = "text2math Copyright (C) 2015  Steven Cutting"
+__copyright__ = "text2math Copyright (C) 2016  Steven Cutting"
 
 
 import sys
