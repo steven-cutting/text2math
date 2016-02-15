@@ -8,3 +8,4 @@
 *.eggs*
 *data/*
 *.7z
+*.ipynb_checkpoints
