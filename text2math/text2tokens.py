@@ -20,7 +20,7 @@ if sys.version_info[0] < 3:
 
 
 with open(os.path.join(os.path.dirname(__file__), 'stopwords.json')) as fp:
-    STOPWORDS = frozenset(json.load(fp)['stopwords'])
+    STOPWORDS = frozenset(json.load(fp))
 
 
 # ---------------------------
@@ -62,11 +62,31 @@ def splitter_of_words(string):
     return split_on_reg(non_alpha_num, string)
 
 
+# ---------------------------
+# Treatments
+
+
 def lower(string):
     """
     Makes string all lowercase.
     """
     return string.lower()
+
+
+@tlz.curry
+def replace(new, old, string):
+    """
+    Replace 'old' in 'string' with 'new'.
+    """
+    return string.replace(old, new)
+
+
+@tlz.curry
+def merge_on(old, string):
+    """
+    Merge on 'old'.
+    """
+    return replace(new='', old=old, string=string)
 
 
 # ---------------------------

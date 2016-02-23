@@ -89,12 +89,37 @@ def test__splitter_of_words__1(string, length, unique):
     assert(len(set(tokens)) == unique)
 
 
+# ---------------------------
+
+
 @pytest.mark.parametrize("string,expected",
                          [("MONKEY", "monkey"),
                           ("Foo Bar baz", "foo bar baz"),
                           ])
 def test__lower(string, expected):
     assert(text2tokens.lower(string) == expected)
+
+
+@pytest.mark.parametrize("new,old,string,expected",
+                         [("", "'", "O'Neill", "ONeill"),
+                          ("", "'", "aren't", "arent"),
+                          (u"", u"-", u"very-elegant", u"veryelegant"),
+                          (" ", "-", "very-elegant", "very elegant"),
+                          ])
+def test__replace(new, old, string, expected):
+    assert(text2tokens.replace(new, old, string) == expected)
+
+
+@pytest.mark.parametrize("char,string,expected",
+                         [("'", "O'Neill", "ONeill"),
+                          ("'", "aren't", "arent"),
+                          ("-", "very-elegant", "veryelegant"),
+                          ])
+def test__merge_on(char, string, expected):
+    assert(text2tokens.merge_on(char, string) == expected)
+
+
+# ---------------------------
 
 
 @pytest.mark.parametrize("tokenset,count",
