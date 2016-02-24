@@ -132,6 +132,26 @@ def filter_stopwords(tokenset):
 
 @tlz.curry
 def ngram_tuples(n, string, minlen=3, maxlen=25):
+    """
+    Creates ngram tuples of size 'n' from 'string'.
+
+    Ex:
+        In [2]: list(ngram_tuples(n=1, string='Just another example text.'))
+        Out[2]: [('another',), ('example',), ('text',)]
+
+        In [2]: list(ngram_tuples(n=2, string='Just another example text.'))
+        Out[2]: [('another', 'example'), ('example', 'text')]
+
+        In [11]: list(ngram_tuples(3, 'I needed a longer example text for this example.'))
+        Out[11]:
+            [('needed', 'longer', 'example'),
+             ('longer', 'example', 'text'),
+             ('example', 'text', 'example')]
+
+
+    minlen - filter out words that have fewer characters than 'minlen'.
+    maxlen - filter out words that have more characters than 'maxlen'.
+    """
     return tlz.pipe(string,
                     lower,
                     simple_split,
@@ -144,6 +164,22 @@ def ngram_tuples(n, string, minlen=3, maxlen=25):
 
 @tlz.curry
 def ngram(n, string, minlen=3, maxlen=25):
+    """
+    Creates ngram tuples of size 'n' from 'string'.
+
+    Ex:
+        In [2]: list(ngram(n=1, string='Just another example text.'))
+        Out[2]: ['another', 'example', 'text']
+
+        In [2]: list(ngram(n=2, string='Just another example text.'))
+        Out[2]: ['another_example', 'example_text']
+
+        In [10]: list(ngram(3, 'I needed a longer example text for this example.'))
+        Out[10]: ['needed_longer_example', 'longer_example_text', 'example_text_example']
+
+    minlen - filter out words that have fewer characters than 'minlen'.
+    maxlen - filter out words that have more characters than 'maxlen'.
+    """
     return tlz.pipe(string,
                     ngram_tuples(n, minlen=minlen, maxlen=maxlen),
                     map_c(join_strings("_")))
