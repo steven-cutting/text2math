@@ -42,6 +42,11 @@ def join_strings(glue, strings):
 
 
 def simple_split(string):
+    """
+    Same as str.split()
+
+    Splits 'string' on whitespace. Empty strings are remove from the result.
+    """
     return string.split()
 
 
