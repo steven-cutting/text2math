@@ -133,6 +133,9 @@ def std_decode(text, encoding='utf-8', errors='strict'):
 
 
 def guess_encoding(text):
+    """
+    Uses chardet to try and make a best guess as to the strings encoding.
+    """
     return chardet.detect(text).get('encoding')
 
 
