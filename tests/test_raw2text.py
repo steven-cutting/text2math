@@ -50,9 +50,10 @@ def test__verify_bytestring_pass():
 
 # Examples from https://github.com/LuminosoInsight/python-ftfy
 @pytest.mark.parametrize("string,expected",
-                         [(u'30 \U0001d5c4\U0001d5c6/\U0001d5c1', u'30 km/h'),
-                          (u'This text should be in â€œquotesâ€\x9d.',
+                         [(u'This text should be in â€œquotesâ€\x9d.',
                            u'This text should be in "quotes".'),
+                          # expected to fail on OSX
+                          (u'30 \U0001d5c4\U0001d5c6/\U0001d5c1', u'30 km/h'),
                           (u'uÌˆnicode', u'ünicode'),
                           (u'HTML entities &lt;3',
                            u'HTML entities <3'),
@@ -72,6 +73,7 @@ def test__clean_unicode(string, expected):
 # Examples from https://pypi.python.org/pypi/Unidecode/
 @pytest.mark.parametrize("string,expected",
                          [(u'ko\u017eu\u0161\u010dek', u'kozuscek'),
+                          # expected to fail on OSX
                           (u'30 \U0001d5c4\U0001d5c6/\U0001d5c1', u'30 km/h'),
                           (u"\u5317\u4EB0", 'Bei Jing '),
                           ])
@@ -125,7 +127,7 @@ def test__adv_decode(string, encoding, expected):
                          [(u'ko\u017eu\u0161\u010dek'.encode("utf-8"),
                            u'kozuscek'),
                           (u'30 \U0001d5c4\U0001d5c6/\U0001d5c1'.encode("utf-8"),
-                           u'30 km/h'),
+                           u'30 km/h'),  # expected to fail on OSX
                           (u"\u5317\u4EB0".encode("utf-8"), 'Bei Jing '),
                           (u"Broken text&hellip; it&#x2019;s ﬂubberiﬁc!".encode("utf-8"),
                            u"Broken text... it's flubberific!"),
