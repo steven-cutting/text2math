@@ -10,7 +10,7 @@ elif [ "$1" = 'build' ]; then
   exec find . -name "test_*" -type d -exec sh -c '(cd {} && docker-compose build)' ';'
 elif [ "$1" = 'run' ]; then
   echo "Running tests"
-  exec find . -name "test_*" -type d -exec sh -c '(cd {} && docker-compose run test)' ';'
+  exec find . -name "test_*" -type d -exec sh -c '(cd {} && docker-compose run --rm test)' ';'
 else
   exec ./rtests "run"
 fi
