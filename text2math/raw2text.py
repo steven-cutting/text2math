@@ -37,19 +37,6 @@ else:
 # Read and parse
 
 
-@tlz.curry
-def _get_xml_attr(key, xml_element):
-    return xml_element.attributes[key].value
-
-
-@tlz.curry
-def _try_to_get_xml_attr(key, xml_element, default=''):
-    try:
-        return _get_xml_attr(key, xml_element)
-    except(KeyError):
-        return default
-
-
 def get_text_from_xml_file(filename):
     """
     This is setup for extracting text from the Stackoverflow posts data dump
@@ -57,6 +44,18 @@ def get_text_from_xml_file(filename):
 
     Returns a stream of Post bodies (just the text).
     """
+
+    @tlz.curry
+    def _get_xml_attr(key, xml_element):
+        return xml_element.attributes[key].value
+
+    @tlz.curry
+    def _try_to_get_xml_attr(key, xml_element, default=''):
+        try:
+            return _get_xml_attr(key, xml_element)
+        except(KeyError):
+            return default
+
     return tlz.pipe(filename,
                     minidom.parse,  # Not pure
                     lambda layer0: layer0.getElementsByTagName("posts")[0],
