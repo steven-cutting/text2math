@@ -36,6 +36,20 @@ def test__stopwords__2():
                     lambda length: bool(length == 4)))
 
 
+@pytest.mark.parametrize("string,expected",
+                         [(u"baz", True),
+                          (b"baz", True),
+                          (u"all", False),
+                          py3_xfail((b"all", False)),
+                          (u"this", False),
+                          (u"because", False),
+                          (u"itself", False),
+                          ])
+def test__not_stopword(string, expected):
+    assert(text2tokens.not_stopword(string) ==
+           expected)
+
+
 @pytest.mark.parametrize("glue,strings,expected",
                          [("-", ["foo", "bar"], "foo-bar"),
                           ("baz", ["foo", "bar"], "foobazbar"),

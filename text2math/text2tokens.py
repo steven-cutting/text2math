@@ -156,11 +156,14 @@ def filter_longer_than(n, tokenset):
     return tlz.filter(lambda tkn: len(tkn) < n, tokenset)
 
 
+not_stopword = lambda string: string not in STOPWORDS
+
+
 def filter_stopwords(tokenset):
     """
-    Filters out stopwords.
+    Filters out tokens that are stopwords.
     """
-    return tlz.filter(lambda tkn: tkn not in STOPWORDS, tokenset)
+    return tlz.filter(not_stopword, tokenset)
 
 
 # -----------------------------------------------------------------------------
