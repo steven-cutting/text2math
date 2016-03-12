@@ -16,6 +16,8 @@ reduce_c = tlz.curry(tlz.reduce)
 
 from text2math import text2tokens
 
+from utils import py3_xfail
+
 
 is_generator = lambda obj: isinstance(obj, types.GeneratorType)
 
@@ -108,6 +110,54 @@ def test__lower(string, expected):
                           ])
 def test__replace(new, old, string, expected):
     assert(text2tokens.replace(new, old, string) == expected)
+
+
+@pytest.mark.parametrize("string,expected",
+                         [(u"his own high-power lenses", u'his own high power lenses'),
+                          (u"his own high--power lenses", u'his own high power lenses'),
+                          py3_xfail((b'his own high-power lenses',
+                                     b'his own high power lenses')),
+                          (u'his tall, spare figure', u'his tall  spare figure'),
+                          (u'his tall , spare figure', u'his tall   spare figure'),
+                          (u'By-the-way', u'By the way'),
+                          (u"isn't", u"isn t"),
+                          py3_xfail((b"isn't", b"isn t")),
+                          ])
+def test__replace_punct(string, expected):
+    assert(text2tokens.replace_punct(string, replace=u" ") ==
+           expected)
+
+
+@pytest.mark.parametrize("string,expected",
+                         [(u"his own high-power lenses", u'his own high power lenses'),
+                          (u"his own high--power lenses", u'his own high power lenses'),
+                          py3_xfail((b'his own high-power lenses',
+                                     b'his own high power lenses')),
+                          (u'his tall, spare figure', u'his tall  spare figure'),
+                          (u'his tall , spare figure', u'his tall   spare figure'),
+                          (u'By-the-way', u'By the way'),
+                          (u"isn't", u"isn't"),
+                          py3_xfail((b"isn't", b"isn't")),
+                          ])
+def test__punct_to_space(string, expected):
+    assert(text2tokens.punct_to_space(string) ==
+           expected)
+
+
+@pytest.mark.parametrize("string,expected",
+                         [(u"his own high-power lenses", u'his own high-power lenses'),
+                          (u"his own high--power lenses", u'his own high--power lenses'),
+                          py3_xfail((b'his own high-power lenses',
+                                     b'his own high-power lenses')),
+                          (u'his tall, spare figure', u'his tall, spare figure'),
+                          (u'his tall , spare figure', u'his tall , spare figure'),
+                          (u'By-the-way', u'By-the-way'),
+                          (u"isn't", u"isnt"),
+                          py3_xfail((b"isn't", b"isnt")),
+                          ])
+def test__drop_punct(string, expected):
+    assert(text2tokens.drop_punct(string) ==
+           expected)
 
 
 @pytest.mark.parametrize("char,string,expected",

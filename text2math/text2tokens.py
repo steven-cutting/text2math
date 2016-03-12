@@ -23,6 +23,13 @@ with open(os.path.join(os.path.dirname(__file__), 'stopwords.json')) as fp:
     STOPWORDS = frozenset(json.load(fp))
 
 
+PUNCTUATIONPAT = r"[\!\"\#\$\%\&\(\)\*\+\,\-\.\/\:\;\<\=\>\?\@\[\\\]\^\_\`\{\|\}\~']+"
+
+PUNCTUATIONPAT_SPLIT = r"[\!\"\#\$\%\&\(\)\*\+\,\-\.\/\:\;\<\=\>\?\@\[\\\]\^\_\`\{\|\}\~]+"
+
+PUNCTUATIONPAT_DROP = r"[\']+"
+
+
 # ---------------------------
 
 
@@ -86,6 +93,35 @@ def replace(new, old, string):
     return string.replace(old, new)
 
 
+def replace_punct(string, replace=u'', pattern=PUNCTUATIONPAT):
+    """
+    Replaces punctuation in 'string' with 'replace'.
+    Uses 'pattern' to find punctuation.
+
+    """
+    return re.subn(pattern,
+                   replace,
+                   string)[0]
+
+
+def punct_to_space(string, pattern=PUNCTUATIONPAT_SPLIT):
+    """
+    Replaces most punctuation in 'sting' with a space.
+    Uses 'pattern' to find punctuation.
+
+    """
+    return replace_punct(string, replace=u' ', pattern=pattern)
+
+
+def drop_punct(string, pattern=PUNCTUATIONPAT_DROP):
+    """
+    Removes most punctuation in 'sting'.
+    Uses 'pattern' to find punctuation.
+
+    """
+    return replace_punct(string, replace=u'', pattern=pattern)
+
+
 @tlz.curry
 def merge_on(old, string):
     """
@@ -134,6 +170,7 @@ def filter_stopwords(tokenset):
 def ngram_tuples(n, string, minlen=3, maxlen=25):
     """
     Creates ngram tuples of size 'n' from 'string'.
+    Also, changes string to lowercase, removes generic stopwords and splits on all non alphanumeric.
 
     Ex:
         In [2]: list(ngram_tuples(n=1, string='Just another example text.'))
