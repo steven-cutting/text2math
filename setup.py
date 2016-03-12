@@ -40,6 +40,7 @@ setup(
     packages=find_packages(exclude=('scripts', 'tests')),
     # scripts=['bin/word-counts', 'bin/text-2-bow'],
     install_requires=['toolz>=0.7.4',
+                      'cchardet==1.0.0',
                       ],
     setup_requires=['pytest-runner>=2.6.2'],
     tests_require=['pytest>=2.8.7'],
