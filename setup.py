@@ -38,7 +38,7 @@ setup(
     author='Steven Cutting',
     author_email='steven.e.cutting@linux.com',
     packages=find_packages(exclude=('scripts', 'tests')),
-    scripts=['bin/word-counts', 'bin/text-2-bow'],
+    # scripts=['bin/word-counts', 'bin/text-2-bow'],
     install_requires=['toolz>=0.7.4',
                       ],
     setup_requires=['pytest-runner>=2.6.2'],
