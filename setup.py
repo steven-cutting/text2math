@@ -8,8 +8,6 @@ from setuptools import setup, find_packages
 with open("README.md") as fp:
     THE_LONG_DESCRIPTION = fp.read()
 
-PACKAGES = ['text2math']
-
 
 setup(
     name="text2math",
@@ -37,7 +35,8 @@ setup(
     keywords='nlp text ngram ngrams',
     author='Steven Cutting',
     author_email='steven.e.cutting@linux.com',
-    packages=find_packages(exclude=('scripts', 'tests')),
+    packages=find_packages(exclude=('bin', 'tests', 'docker',
+                                    'data', 'notebooks')),
     # scripts=['bin/word-counts', 'bin/text-2-bow'],
     install_requires=['toolz>=0.7.4',
                       'cchardet>=1.0.0',
