@@ -1,4 +1,4 @@
-A very simple package that implements a very simple method for generating ngrams and a bag of words representation from any given text.
+A simple package designed to be used for demonstrating basic Natural Language Processing (NLP) feature engineering in Python.
 
 ## More Info:
 
