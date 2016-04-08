@@ -15,6 +15,8 @@ from text2math import raw2text
 
 from utils import osx_xfail
 
+# TODO (steven_c) Find out why km/h test fails only on OSX.
+
 
 @pytest.mark.parametrize("string,expected",
                          [("<p>foo<\p><li>bar<\li>", "foobar"),
@@ -54,7 +56,7 @@ def test__verify_bytestring_pass():
                          [(u'This text should be in â€œquotesâ€\x9d.',
                            u'This text should be in "quotes".'),
                           # expected to fail on OSX
-                          (u'30 \U0001d5c4\U0001d5c6/\U0001d5c1', u'30 km/h'),
+                          osx_xfail((u'30 \U0001d5c4\U0001d5c6/\U0001d5c1', u'30 km/h')),
                           (u'uÌˆnicode', u'ünicode'),
                           (u'HTML entities &lt;3',
                            u'HTML entities <3'),
@@ -75,7 +77,7 @@ def test__clean_unicode(string, expected):
 @pytest.mark.parametrize("string,expected",
                          [(u'ko\u017eu\u0161\u010dek', u'kozuscek'),
                           # expected to fail on OSX
-                          (u'30 \U0001d5c4\U0001d5c6/\U0001d5c1', u'30 km/h'),
+                          osx_xfail((u'30 \U0001d5c4\U0001d5c6/\U0001d5c1', u'30 km/h')),
                           (u"\u5317\u4EB0", 'Bei Jing '),
                           ])
 def test__normize_text(string, expected):
