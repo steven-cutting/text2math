@@ -9,10 +9,11 @@ from operator import eq
 
 import pytest
 import cytoolz as tlz
+c_eq = tlz.curry(eq)
 
 from text2math import raw2text
 
-c_eq = tlz.curry(eq)
+from utils import osx_xfail
 
 
 @pytest.mark.parametrize("string,expected",
@@ -126,8 +127,8 @@ def test__adv_decode(string, encoding, expected):
 @pytest.mark.parametrize("string,expected",
                          [(u'ko\u017eu\u0161\u010dek'.encode("utf-8"),
                            u'kozuscek'),
-                          (u'30 \U0001d5c4\U0001d5c6/\U0001d5c1'.encode("utf-8"),
-                           u'30 km/h'),  # expected to fail on OSX
+                          osx_xfail((u'30 \U0001d5c4\U0001d5c6/\U0001d5c1'.encode("utf-8"),
+                                     u'30 km/h')),  # Find out why it fails on OSX.
                           (u"\u5317\u4EB0".encode("utf-8"), 'Bei Jing '),
                           (u"Broken text&hellip; it&#x2019;s ﬂubberiﬁc!".encode("utf-8"),
                            u"Broken text... it's flubberific!"),
