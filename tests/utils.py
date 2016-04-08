@@ -12,3 +12,7 @@ import pytest
 
 py3_xfail = pytest.mark.xfail(sys.version_info >= (3, 0),
                               reason="Doesn't work in python 3+.")
+
+
+osx_xfail = pytest.mark.xfail(sys.platform == 'darwin',
+                              reason="Doesn't work on OSX.")
