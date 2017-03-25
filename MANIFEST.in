@@ -1,0 +1,5 @@
+# Ensure that the tests are included.
+recursive-include tests *
+
+include LICENSE
+include gpl-3.0-Preamble.txt
