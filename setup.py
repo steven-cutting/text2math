@@ -13,7 +13,7 @@ setup(
     name="text2math",
     url="https://github.com/steven-cutting/text2math",
     # Semantic versioning. MAJOR.MINOR.MAINTENANCE.(dev1|a1|b1)
-    version="0.0.2.dev1",
+    version="0.0.3.dev1",
     license='GNU GPL v3+',
 
     description="Simple package for generating ngrams and bag of words representation from text.",
