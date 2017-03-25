@@ -5,7 +5,10 @@ __created_on__ = '02/13/2016'
 __copyright__ = "text2math Copyright (C) 2016  Steven Cutting"
 
 
-import toolz as tlz
+try:
+    import cytoolz as tlz
+except ImportError:
+    import toolz as tlz
 
 
 def freq(tokenset):

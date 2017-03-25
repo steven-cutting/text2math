@@ -7,8 +7,11 @@ __copyright__ = "text2math Copyright (C) 2016  Steven Cutting"
 
 
 import sys
+try:
+    import cytoolz as tlz
+except ImportError:
+    import toolz as tlz
 
-import cytoolz as tlz
 c_map = tlz.curry(tlz.map)
 
 

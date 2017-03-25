@@ -10,7 +10,10 @@ import os
 import re
 import sys
 
-import toolz as tlz
+try:
+    import cytoolz as tlz
+except ImportError:
+    import toolz as tlz
 filter_c = tlz.curry(tlz.filter)
 map_c = tlz.curry(tlz.map)
 sliding_window_c = tlz.curry(tlz.sliding_window)

@@ -8,7 +8,10 @@ __copyright__ = "text2math Copyright (C) 2016  Steven Cutting"
 from operator import eq
 
 import pytest
-import cytoolz as tlz
+try:
+    import cytoolz as tlz
+except ImportError:
+    import toolz as tlz
 c_eq = tlz.curry(eq)
 
 from text2math import raw2text

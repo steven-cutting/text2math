@@ -4,7 +4,10 @@ __author_email__ = 'steven.e.cutting@linux.com'
 __created_on__ = '02/06/2016'
 __copyright__ = "text2math Copyright (C) 2016  Steven Cutting"
 
-import cytoolz as tlz
+try:
+    import cytoolz as tlz
+except ImportError:
+    import toolz as tlz
 
 from text2math.raw2text import(remove_html_bits, decode_and_fix, adv_decode)
 from text2math.text2tokens import(ngram, unigram, bigram, trigram,

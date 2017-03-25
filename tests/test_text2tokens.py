@@ -4,13 +4,13 @@ __author_email__ = 'steven.e.cutting@linux.com'
 __created_on__ = '02/13/2016'
 __copyright__ = "text2math Copyright (C) 2016  Steven Cutting"
 
-
-from itertools import repeat
-from functools import partial
 import types
 
 import pytest
-import toolz as tlz
+try:
+    import cytoolz as tlz
+except ImportError:
+    import toolz as tlz
 map_c = tlz.curry(tlz.map)
 reduce_c = tlz.curry(tlz.reduce)
 
