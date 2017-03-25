@@ -13,7 +13,7 @@ setup(
     name="text2math",
     url="https://github.com/steven-cutting/text2math",
     # Semantic versioning. MAJOR.MINOR.MAINTENANCE.(dev1|a1|b1)
-    version="0.0.0.dev1",
+    version="0.0.2.dev1",
     license='GNU GPL v3+',
 
     description="Simple package for generating ngrams and bag of words representation from text.",
@@ -46,7 +46,9 @@ setup(
                       ],
     extras_require={
         'faster': ['cchardet>=1.0.0', 'cytoolz>=0.7.3'],
-        'dev': ['cchardet>=1.0.0', 'cytoolz>=0.7.3'],
+        'extra': ['beautifulsoup4>=4.4.0', 'lxml>=3.4.4'],
+        'dev': ['cchardet>=1.0.0', 'cytoolz>=0.7.3',
+                'beautifulsoup4>=4.4.0', 'lxml>=3.4.4'],
         'test': ['pytest-runner>=2.6.2', 'pytest>=2.8.7'],
     },
     setup_requires=['pytest-runner>=2.6.2'],

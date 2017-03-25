@@ -7,6 +7,8 @@ __copyright__ = "text2math Copyright (C) 2016  Steven Cutting"
 
 
 import sys
+import warnings
+
 try:
     import cytoolz as tlz
 except ImportError:
@@ -20,7 +22,12 @@ c_map = tlz.curry(tlz.map)
 
 # Parsing
 from xml.dom import minidom
-from bs4 import BeautifulSoup
+
+try:
+    from bs4 import BeautifulSoup
+except ImportError:
+    warnings.warn("To use remove_html_bits you should install bs4 and lxml.")
+
 
 # Encoding issues
 try:
