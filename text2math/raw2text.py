@@ -20,7 +20,10 @@ from xml.dom import minidom
 from bs4 import BeautifulSoup
 
 # Encoding issues
-import cchardet as chardet
+try:
+    import cchardet as chardet
+except:
+    import chardet
 from unidecode import unidecode
 import ftfy
 
