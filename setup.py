@@ -13,7 +13,7 @@ setup(
     name="text2math",
     url="https://github.com/steven-cutting/text2math",
     # Semantic versioning. MAJOR.MINOR.MAINTENANCE.(dev1|a1|b1)
-    version="0.0.3.dev1",
+    version="0.0.5.dev1",
     license='GNU GPL v3+',
 
     description="Simple package for generating ngrams and bag of words representation from text.",
@@ -53,4 +53,7 @@ setup(
     },
     setup_requires=['pytest-runner>=2.6.2'],
     tests_require=['pytest>=2.8.7'],
+    package_data={
+        '': ['*.json', ],
+    },
     )

@@ -223,9 +223,12 @@ def ngram(n, string, minlen=3, maxlen=25):
     minlen - filter out words that have fewer characters than 'minlen'.
     maxlen - filter out words that have more characters than 'maxlen'.
     """
-    return tlz.pipe(string,
-                    ngram_tuples(n, minlen=minlen, maxlen=maxlen),
-                    map_c(join_strings("_")))
+    try:
+        return tlz.pipe(string,
+                        ngram_tuples(n, minlen=minlen, maxlen=maxlen),
+                        map_c(join_strings("_")))
+    except StopIteration:  # Only shows up with cytoolz when tokens in string less than n.
+        return []
 
 
 def unigram(string, **kwargs):

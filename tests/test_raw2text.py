@@ -21,13 +21,13 @@ from utils import osx_xfail
 # TODO (steven_c) Find out why km/h test fails only on OSX.
 
 
-@pytest.mark.parametrize("string,expected",
-                         [("<p>foo<\p><li>bar<\li>", "foobar"),
-                          ])
-def test__remove_html_bits(string, expected):
-    assert(tlz.pipe(string,
-                    raw2text.remove_html_bits,
-                    c_eq(expected)))
+# @pytest.mark.parametrize("string,expected",
+#                          [("<p>foo<\p><li>bar<\li>", "foobar"),
+#                           ])
+# def test__remove_html_bits(string, expected):
+#     assert(tlz.pipe(string,
+#                     raw2text.remove_html_bits,
+#                     c_eq(expected)))
 
 
 def test__verify_unicode_fail():
